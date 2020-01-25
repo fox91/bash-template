@@ -7,6 +7,7 @@ set -Eeuo pipefail
 source "${PROGDIR}"/utils-common.sh
 source "${PROGDIR}"/utils-logs.sh
 source "${PROGDIR}"/utils-lock.sh
+source "${PROGDIR}"/utils-git.sh
 source "${PROGDIR}"/app.sh
 
 my_function() {
@@ -24,9 +25,13 @@ _main() {
     || eexit "Only one instance of $PROGNAME can run at one time."
 
   log_info "START ${PROGNAME}:${FUNCNAME}(${0})"
+  log_info "  git repo: '$(git_status)'"
   # log "  args: [${1}, ${2}]"
+
   exec_my_app
+
   exec_some_code
+
   log_info "END   ${PROGNAME}:${FUNCNAME}"
 }
 

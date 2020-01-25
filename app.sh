@@ -6,6 +6,7 @@ set -Eeuo pipefail
 
 source "${PROGDIR}"/utils-common.sh
 source "${PROGDIR}"/utils-logs.sh
+source "${PROGDIR}"/utils-git.sh
 
 my_function() {
   log_debug "  ${FUNCNAME}"
@@ -39,11 +40,15 @@ test_return_value() {
 
 _main() {
   log_info "START ${PROGNAME}:${FUNCNAME} - DT:$(dateum)"
+  log_info "  git repo: '$(git_status)'"
   # log "  args: [${1}, ${2}]"
   exec_my_app
+
   test_logs
+
   test_return_value
   local result=$(test_return_value)
+
   log_debug "  result: '${result}'"
   log_info "END   ${PROGNAME}:${FUNCNAME} - DT:$(dateum)"
 }
