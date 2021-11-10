@@ -4,10 +4,10 @@ set -Eeuo pipefail
 [ -z "${PROGNAME-}" ] && typeset -r PROGNAME=$(basename "$0")
 [ -z "${PROGDIR-}" ] && typeset -r PROGDIR=$(readlink -m "$(dirname "$0")")
 
-source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/utils-common.sh
-source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/utils-logs.sh
-source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/utils-git.sh
-source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/utils-info.sh
+source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/../utils-common.sh
+source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/../utils-logs.sh
+source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/../utils-git.sh
+source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/../utils-info.sh
 
 my_function() {
   log_debug "  ${FUNCNAME[0]}"

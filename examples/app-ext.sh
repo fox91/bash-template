@@ -4,7 +4,7 @@ set -Eeuo pipefail
 [ -z "${PROGNAME-}" ] && typeset -r PROGNAME=$(basename "$0")
 [ -z "${PROGDIR-}" ] && typeset -r PROGDIR=$(readlink -m "$(dirname "$0")")
 
-source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/utils-lock.sh
+source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/../utils-lock.sh
 source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/app.sh
 
 my_function() {
