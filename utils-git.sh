@@ -15,7 +15,17 @@ git_status() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) \
       || ref="➦ $(git describe --exact-match --tags HEAD 2> /dev/null)" \
       || ref="➦ $(git show-ref --head -s --abbrev | head -n1 2> /dev/null)"
-    echo "${ref/refs\/heads\// }$dirty"
+    echo "${ref/refs\/heads\// }${dirty}"
   fi
+  cd "${run_pwd}"
+}
+
+git_repo() {
+  local run_pwd
+  run_pwd="$(pwd)" \
+    && cd "${PROGDIR}"
+  git remote get-url origin \
+    2>/dev/null \
+    || true
   cd "${run_pwd}"
 }

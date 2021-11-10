@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-source "${PROGDIR}"/utils-common.sh
+source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/utils-common.sh
 
 _log() {
-  local str="${1}"
-  local lvl="${2:-DEBUG}"
+  typeset str="${1}"
+  typeset lvl="${2:-DEBUG}"
 
   if [[ -t 1 ]]; then
-    local color="${3:-\033[0m}"
-    local nc='\033[0m' # No Color
+    typeset color="${3:-\033[0m}"
+    typeset nc='\033[0m' # No Color
 
-    printf "${color}%s [%-7s] %5d - %s${nc}\n" $(timeu) "${lvl}" ${BASHPID} "${str}" >&2
+    printf "${color}%s [%-8s] %5d - %s${nc}\n" "$(timeu)" "${lvl}" ${BASHPID} "${str}" >&2
   else
-    printf "%s [%-7s] %5d - %s\n" $(timeu) "${lvl}" ${BASHPID} "${str}" >&2
+    printf "%s [%-8s] %5d - %s\n" "$(timeu)" "${lvl}" ${BASHPID} "${str}" >&2
   fi
 }
 
