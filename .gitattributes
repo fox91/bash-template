@@ -1,0 +1,7 @@
+# Auto-detect text files, ensure they use LF.
+* text=auto eol=lf
+
+# Ignore files for distribution archives.
+/*.dist* export-ignore
+/.* export-ignore
+/examples export-ignore

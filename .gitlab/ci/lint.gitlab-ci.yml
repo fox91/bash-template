@@ -1,0 +1,14 @@
+shell-lint:
+  stage: lint
+  image: koalaman/shellcheck-alpine:stable
+  script:
+    - find ./ -type f -name '*.sh' -print0 | xargs -0 -n1 -P4 -- shellcheck -C -S ${SEVERITY} -x
+  parallel:
+    matrix:
+      - SEVERITY: error
+      - SEVERITY: warning
+  rules:
+    - if: $SEVERITY != "error"
+      allow_failure: true
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+  dependencies: []

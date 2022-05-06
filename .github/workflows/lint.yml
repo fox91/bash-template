@@ -1,0 +1,25 @@
+name: lint
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*'
+  pull_request:
+
+jobs:
+  shell-lint:
+    name: "shellcheck: ${{ matrix.severity }}s"
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.severity != 'error' }}
+    strategy:
+      matrix:
+        severity: ["error"]
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Lint
+        run: find ./ -type f -name '*.sh' -print0 | xargs -0 -n1 -P4 -- shellcheck -C -S ${{ matrix.severity }} -x
