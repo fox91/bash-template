@@ -35,16 +35,17 @@ _cpu_model_name() {
   lscpu \
     | grep 'Model name' \
     | sed -E \
-        -e 's/^Model\ name:\ +//' \
-        -e 's/@\ ([0-9])/@\1/' \
+      -e 's/^Model\ name:\ +//' \
+      -e 's/@\ ([0-9])/@\1/' \
     | sed \
-        -e 's/(R)/®/g' \
-        -e 's/(TM)/™/g' \
+      -e 's/(R)/®/g' \
+      -e 's/(TM)/™/g' \
     || true
 }
 
 cpu_info() {
-  typeset cpu_vendor; cpu_vendor=$(_cpu_vendor)
+  typeset cpu_vendor
+  cpu_vendor=$(_cpu_vendor)
   if [[ ${cpu_vendor} != '' ]]; then
     cpu_vendor="${cpu_vendor} "
   fi

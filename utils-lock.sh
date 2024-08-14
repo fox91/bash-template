@@ -5,7 +5,8 @@ typeset -r LOCKFILE_DIR=/tmp
 typeset -r LOCK_FD=200
 
 lock() {
-  typeset prefix; prefix=$(basename "${1}" .sh)
+  typeset prefix
+  prefix=$(basename "${1}" .sh)
   typeset fd=${2:-$LOCK_FD}
   typeset lock_file=$LOCKFILE_DIR/$prefix.lock
 

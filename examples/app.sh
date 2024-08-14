@@ -50,7 +50,8 @@ _main() {
   test_logs
 
   test_return_value
-  typeset result; result=$(test_return_value)
+  typeset result
+  result=$(test_return_value)
 
   log_debug "  result: '${result}'"
   log_info "END   ${PROGNAME}:${FUNCNAME[0]} - DT:$(dateum)"

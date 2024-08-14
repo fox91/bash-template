@@ -14,3 +14,11 @@ indent_size = 2
 
 [*.sh]
 indent_size = 2
+
+; shfmt
+[[shell]]
+indent_style = space
+indent_size = 2
+binary_next_line = true
+switch_case_indent = true
+space_redirects = true
