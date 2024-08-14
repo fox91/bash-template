@@ -6,16 +6,22 @@ _git_status_dirty() {
   [[ -n $dirty ]] && echo " ●"
 }
 
+_git_stash_dirty() {
+  stash=$(git stash list 2> /dev/null | tail -n 1)
+  [[ -n $stash ]] && echo " ⚑"
+}
+
 git_status() {
-  typeset ref dirty run_pwd
+  typeset ref dirty stash run_pwd
   run_pwd="$(pwd)" \
     && cd "${PROGDIR}"
   if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     dirty=$(_git_status_dirty)
+    stash=$(_git_stash_dirty)
     ref=$(git symbolic-ref HEAD 2> /dev/null) \
       || ref="➦ $(git describe --exact-match --tags HEAD 2> /dev/null)" \
       || ref="➦ $(git show-ref --head -s --abbrev | head -n1 2> /dev/null)"
-    echo "${ref/refs\/heads\// }${dirty}"
+    echo "${ref/refs\/heads\// }${stash}${dirty}"
   fi
   cd "${run_pwd}"
 }
