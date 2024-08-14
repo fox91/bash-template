@@ -8,10 +8,10 @@ lock() {
   typeset prefix
   prefix=$(basename "${1}" .sh)
   typeset fd=${2:-$LOCK_FD}
-  typeset lock_file=$LOCKFILE_DIR/$prefix.lock
+  typeset lock_file="${LOCKFILE_DIR}/$prefix.lock"
 
   # create lock file
-  eval "exec $fd>$lock_file"
+  eval "exec ${fd}> ${lock_file}"
 
   # acquier the lock
   flock -n "${fd}" \
@@ -20,8 +20,8 @@ lock() {
 }
 
 eexit() {
-  typeset error_str="$@"
+  typeset error_str="$*"
 
-  echo $error_str
+  echo "${error_str}"
   exit 1
 }

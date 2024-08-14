@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-[ -z "${PROGNAME-}" ] && typeset -r PROGNAME=$(basename "$0")
-[ -z "${PROGDIR-}" ] && typeset -r PROGDIR=$(readlink -m "$(dirname "$0")")
+typeset _progname _progdir
+_progname=$(basename "$0")
+_progdir=$(readlink -m "$(dirname "$0")")
+[ -z "${PROGNAME-}" ] && typeset -r PROGNAME="${_progname}"
+[ -z "${PROGDIR-}" ] && typeset -r PROGDIR="${_progdir}"
+unset _progname _progdir
 
 source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/../utils-common.sh
 source "$(readlink -m "$(dirname "${BASH_SOURCE[0]}")")"/../utils-logs.sh

@@ -10,7 +10,7 @@ git_status() {
   typeset ref dirty run_pwd
   run_pwd="$(pwd)" \
     && cd "${PROGDIR}"
-  if $(git rev-parse --is-inside-work-tree > /dev/null 2>&1); then
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     dirty=$(_git_status_dirty)
     ref=$(git symbolic-ref HEAD 2> /dev/null) \
       || ref="➦ $(git describe --exact-match --tags HEAD 2> /dev/null)" \
