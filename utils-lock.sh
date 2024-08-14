@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-readonly LOCKFILE_DIR=/tmp
-readonly LOCK_FD=200
+typeset -r LOCKFILE_DIR=/tmp
+typeset -r LOCK_FD=200
 
 lock() {
   typeset prefix; prefix=$(basename "${1}" .sh)

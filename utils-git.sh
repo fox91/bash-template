@@ -7,7 +7,7 @@ _git_status_dirty() {
 }
 
 git_status() {
-  local ref dirty run_pwd
+  typeset ref dirty run_pwd
   run_pwd="$(pwd)" \
     && cd "${PROGDIR}"
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
@@ -21,7 +21,7 @@ git_status() {
 }
 
 git_repo() {
-  local run_pwd
+  typeset run_pwd
   run_pwd="$(pwd)" \
     && cd "${PROGDIR}"
   git remote get-url origin \
