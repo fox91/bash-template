@@ -19,7 +19,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       -
         name: Lint
         run: find ./ -type f -name '*.sh' -print0 | xargs -0 -n1 -P4 -- shellcheck -C -S ${{ matrix.severity }} -x
